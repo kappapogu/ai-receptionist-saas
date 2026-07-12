@@ -1,0 +1,253 @@
+.webCall {
+  background: linear-gradient(135deg, #0f172a 0%, #1a1f3a 100%);
+  color: #e2e8f0;
+  padding: 5rem 2rem;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.badge {
+  display: inline-block;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #60a5fa;
+  padding: 0.5rem 1.5rem;
+  border-radius: 2rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.content {
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 1.5rem;
+  padding: 3rem 2rem;
+  backdrop-filter: blur(10px);
+}
+
+.agentInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.avatar {
+  font-size: 3rem;
+  display: block;
+}
+
+.agentDetails {
+  text-align: center;
+}
+
+.agentDetails h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #60a5fa;
+  margin-bottom: 0.25rem;
+}
+
+.agentDetails p {
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.micContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.micButton {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, rgba(59, 130, 246, 0.1) 100%);
+  border: 2px solid #3b82f6;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.micButton:hover {
+  border-color: #60a5fa;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, rgba(59, 130, 246, 0.2) 100%);
+  transform: scale(1.05);
+}
+
+.micButton.active {
+  background: radial-gradient(circle, #3b82f6 0%, rgba(59, 130, 246, 0.5) 100%);
+  border-color: #60a5fa;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.8);
+  }
+}
+
+.micIcon {
+  font-size: 3rem;
+  display: block;
+}
+
+.instruction {
+  text-align: center;
+  color: #cbd5e1;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.transcriptBox {
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  min-height: 60px;
+}
+
+.transcriptLabel {
+  color: #94a3b8;
+  font-size: 0.85rem;
+  margin: 0 0 0.5rem 0;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.transcriptText {
+  color: #e2e8f0;
+  font-size: 1rem;
+  margin: 0;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), transparent);
+  margin: 2rem 0;
+}
+
+.phoneSection {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.label {
+  color: #cbd5e1;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.phoneNumber {
+  display: inline-block;
+  color: #60a5fa;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 1rem 1.5rem;
+  border: 2px solid #3b82f6;
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.phoneNumber:hover {
+  background: rgba(59, 130, 246, 0.1);
+  color: #93c5fd;
+  border-color: #60a5fa;
+}
+
+.subtext {
+  color: #64748b;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.footer {
+  text-align: center;
+  color: #94a3b8;
+  font-size: 0.9rem;
+  margin: 0;
+  font-style: italic;
+}
+
+.fallback {
+  text-align: center;
+  padding: 2rem;
+}
+
+.fallback p {
+  color: #cbd5e1;
+  margin-bottom: 1rem;
+}
+
+.phoneLink {
+  display: inline-block;
+  color: #60a5fa;
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 1rem 2rem;
+  border: 2px solid #3b82f6;
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.phoneLink:hover {
+  background: rgba(59, 130, 246, 0.1);
+  color: #93c5fd;
+}
+
+@media (max-width: 768px) {
+  .webCall {
+    padding: 3rem 1rem;
+    min-height: auto;
+  }
+
+  .content {
+    padding: 2rem 1.5rem;
+  }
+
+  .micButton {
+    width: 140px;
+    height: 140px;
+  }
+
+  .micIcon {
+    font-size: 2.5rem;
+  }
+
+  .phoneNumber {
+    font-size: 1.2rem;
+  }
+}
