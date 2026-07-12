@@ -1,0 +1,134 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0f172a 0%, #1a1f3a 100%);
+  padding: 2rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.card {
+  background: rgba(30, 41, 59, 0.9);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 1rem;
+  padding: 2rem;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.title {
+  color: #60a5fa;
+  font-size: 1.8rem;
+  margin: 0 0 2rem 0;
+  text-align: center;
+}
+
+.infoBox {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  color: #e2e8f0;
+}
+
+.infoBox p {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+}
+
+.button {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  border: none;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 2rem;
+}
+
+.button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.statusBox {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  color: #cbd5e1;
+}
+
+.statusBox p {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+}
+
+.statusText {
+  color: #93c5fd !important;
+  font-weight: 500;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.successBox {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  color: #86efac;
+}
+
+.successBox p {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+}
+
+.instructions {
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  color: #cbd5e1;
+}
+
+.instructions h3 {
+  color: #60a5fa;
+  margin: 0 0 1rem 0;
+  font-size: 1rem;
+}
+
+.instructions ol {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.instructions li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 640px) {
+  .card {
+    padding: 1.5rem;
+  }
+
+  .title {
+    font-size: 1.4rem;
+  }
+}
