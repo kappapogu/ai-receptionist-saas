@@ -1,0 +1,271 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.outer {
+  width: 100%;
+  max-width: 700px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.title {
+  color: #60a5fa;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.subtitle {
+  color: #94a3b8;
+  font-size: 1.1rem;
+  margin: 0.5rem 0 0 0;
+}
+
+.card {
+  background: rgba(30, 41, 59, 0.95);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 1rem;
+  padding: 2.5rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.phoneDisplay {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  background: rgba(15, 23, 42, 0.8);
+  border: 2px solid rgba(59, 130, 246, 0.3);
+  border-radius: 1rem;
+}
+
+.label {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  display: block;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.phoneNumber {
+  display: inline-block;
+  color: #60a5fa;
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 1rem 2rem;
+  border: 3px solid #60a5fa;
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+  margin: 1rem 0;
+  cursor: pointer;
+}
+
+.phoneNumber:hover {
+  background: rgba(96, 165, 250, 0.1);
+  color: #93c5fd;
+  border-color: #93c5fd;
+  box-shadow: 0 0 30px rgba(96, 165, 250, 0.3);
+  transform: scale(1.05);
+}
+
+.phoneNumber.calling {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: #f87171;
+  color: #fca5a5;
+  animation: pulse-red 1s ease-in-out infinite;
+}
+
+@keyframes pulse-red {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(239, 68, 68, 0.4);
+  }
+}
+
+.description {
+  color: #64748b;
+  font-size: 0.95rem;
+  margin: 0.75rem 0 0 0;
+}
+
+.callActive {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.callTimer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  color: #6ee7b7;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.time {
+  background: rgba(16, 185, 129, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-family: 'Courier New', monospace;
+  color: #86efac;
+}
+
+.callStatus {
+  color: #a7f3d0;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.info {
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.info h3 {
+  color: #93c5fd;
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+}
+
+.info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.info li {
+  color: #cbd5e1;
+  padding: 0.5rem 0;
+  line-height: 1.6;
+}
+
+.features {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.features h3 {
+  color: #60a5fa;
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+}
+
+.featureList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.feature {
+  background: rgba(59, 130, 246, 0.05);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+.icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.feature p {
+  color: #cbd5e1;
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.browser {
+  background: rgba(168, 85, 247, 0.1);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.browser p {
+  color: #cbd5e1;
+  margin: 0 0 1rem 0;
+}
+
+.browserLink {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: rgba(168, 85, 247, 0.2);
+  border: 1px solid rgba(168, 85, 247, 0.5);
+  color: #d8b4fe;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.browserLink:hover {
+  background: rgba(168, 85, 247, 0.3);
+  border-color: #d8b4fe;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(59, 130, 246, 0.2);
+  color: #94a3b8;
+  font-size: 0.95rem;
+}
+
+.footer p {
+  margin: 0.5rem 0;
+}
+
+.active {
+  color: #10b981;
+}
+
+@media (max-width: 640px) {
+  .card {
+    padding: 1.5rem;
+  }
+
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .phoneNumber {
+    font-size: 1.8rem;
+    padding: 0.75rem 1.5rem;
+  }
+
+  .featureList {
+    grid-template-columns: 1fr;
+  }
+}
