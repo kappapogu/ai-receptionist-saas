@@ -5,8 +5,15 @@
 
 export async function POST(request) {
   try {
-    const apiKey = process.env.NEXT_PUBLIC_RETELL_API_KEY;
-    const agentId = process.env.NEXT_PUBLIC_RETELL_AGENT_ID;
+    const apiKey = process.env.NEXT_PUBLIC_RETELL_API_KEY?.trim();
+    const agentId = process.env.NEXT_PUBLIC_RETELL_AGENT_ID?.trim();
+
+    console.log('🔍 Env vars:', {
+      apiKey: apiKey?.substring(0, 10) + '...',
+      agentId: agentId,
+      apiKeyLength: apiKey?.length,
+      agentIdLength: agentId?.length,
+    });
 
     if (!apiKey || !agentId) {
       return Response.json(
