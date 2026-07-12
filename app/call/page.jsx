@@ -53,37 +53,20 @@ export default function CallAgent() {
     setCallId(null);
 
     try {
-      // Initiate call to Retell AI number
-      const response = await fetch('/api/retell/initiate-call', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phoneNumber: '+14847465311' }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        setStatus('error');
-        console.error('Call error:', {
-          status: response.status,
-          data: data,
-        });
-        setTranscript(`Error: ${data.error || 'Failed to connect'}`);
-        return;
-      }
-
-      setCallId(data.call_id);
-      setStatus('active');
-      console.log('Call initiated:', data.call_id);
-
       // Start listening for user voice input
+      recognitionRef.current?.start();
+
+      // Brief delay then mark as active
       setTimeout(() => {
-        recognitionRef.current?.start();
+        setStatus('active');
+        setCallId('local-' + Date.now());
       }, 500);
+
+      console.log('Browser voice input started');
     } catch (error) {
       setStatus('error');
-      setTranscript(`Network error: ${error.message}`);
-      console.error('Network error:', error);
+      setTranscript(`Microphone error: ${error.message}`);
+      console.error('Microphone error:', error);
     }
   };
 
