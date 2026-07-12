@@ -1,0 +1,208 @@
+.demo {
+  background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 100%);
+  padding: 5rem 2rem;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.demo h2 {
+  text-align: center;
+  margin-bottom: 0.5rem;
+  color: #1f2937;
+}
+
+.subtitle {
+  text-align: center;
+  color: #6b7280;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+.notConfigured {
+  background: #fff7ed;
+  border: 2px solid #fb923c;
+  border-radius: 1rem;
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+.warning {
+  background: #fef3c7;
+  border-left: 4px solid #f59e0b;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.warning p {
+  margin: 0.5rem 0;
+  color: #92400e;
+  font-weight: 500;
+}
+
+.instructions {
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+}
+
+.instructions h3 {
+  margin-bottom: 1rem;
+  color: #1f2937;
+}
+
+.instructions ol {
+  margin-left: 2rem;
+  color: #6b7280;
+  line-height: 2;
+}
+
+.instructions li {
+  margin-bottom: 0.75rem;
+}
+
+.instructions code {
+  background: #f3f4f6;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-family: monospace;
+  color: #1f2937;
+  display: block;
+  margin: 0.5rem 0;
+  font-weight: 600;
+}
+
+.demoBox {
+  background: #ffffff;
+  border: 2px solid #e5e7eb;
+  border-radius: 1rem;
+  padding: 3rem;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.1);
+  margin-top: 2rem;
+}
+
+.demoContent {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.demoIcon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.demoBox h3 {
+  margin-bottom: 0.75rem;
+  color: #1f2937;
+  font-size: 1.5rem;
+}
+
+.demoBox p {
+  color: #6b7280;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.form input {
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+}
+
+.form input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form input:disabled {
+  background: #f3f4f6;
+  cursor: not-allowed;
+}
+
+.form button {
+  width: 100%;
+  font-size: 1.1rem;
+}
+
+.cancelBtn {
+  background: #f3f4f6;
+  color: #1f2937;
+  border: none;
+  padding: 0.875rem 1.75rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.cancelBtn:hover {
+  background: #e5e7eb;
+}
+
+.message {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+}
+
+.message {
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #86efac;
+}
+
+.features {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.features span {
+  padding: 0.75rem 1.5rem;
+  background: #f0f9ff;
+  border-radius: 2rem;
+  color: #0369a1;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .demo {
+    padding: 3rem 1rem;
+  }
+
+  .demoBox {
+    padding: 2rem 1rem;
+  }
+
+  .form {
+    gap: 0.75rem;
+  }
+
+  .features {
+    gap: 1rem;
+    font-size: 0.85rem;
+  }
+
+  .features span {
+    padding: 0.5rem 1rem;
+  }
+}

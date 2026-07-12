@@ -7,6 +7,7 @@ import Features from '@/components/Features';
 import Industries from '@/components/Industries';
 import WhyItWorks from '@/components/WhyItWorks';
 import Capabilities from '@/components/Capabilities';
+import DemoSection from '@/components/DemoSection';
 import Pricing from '@/components/Pricing';
 import FAQ from '@/components/FAQ';
 import CTA from '@/components/CTA';
@@ -21,6 +22,7 @@ export default function Home() {
       <Industries />
       <WhyItWorks />
       <Capabilities />
+      <DemoSection />
       <Pricing />
       <FAQ />
       <CTA />
