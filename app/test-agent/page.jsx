@@ -7,16 +7,22 @@ export default function TestAgent() {
   const [status, setStatus] = useState('Ready to test');
   const [callId, setCallId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState('');
 
   const handleInitiateCall = async () => {
+    if (!phoneNumber) {
+      setStatus('❌ Please enter your phone number');
+      return;
+    }
+
     setIsLoading(true);
-    setStatus('Initiating call to +1-484-746-5311...');
+    setStatus(`Initiating call to ${phoneNumber}...`);
 
     try {
       const response = await fetch('/api/retell/initiate-call', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phoneNumber: '+14847465311' }),
+        body: JSON.stringify({ phoneNumber }),
       });
 
       const data = await response.json();
@@ -44,13 +50,25 @@ export default function TestAgent() {
         <h1 className={styles.title}>Retell Agent Test</h1>
 
         <div className={styles.infoBox}>
-          <p><strong>Phone Number:</strong> +1-484-746-5311</p>
+          <p><strong>Retell Agent Number:</strong> +1-484-746-5311</p>
           <p><strong>Agent ID:</strong> {process.env.NEXT_PUBLIC_RETELL_AGENT_ID || 'Not configured'}</p>
+        </div>
+
+        <div className={styles.formGroup}>
+          <label className={styles.label}>Your Phone Number (where to call)</label>
+          <input
+            type="tel"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            placeholder="+1 (555) 123-4567"
+            className={styles.input}
+            disabled={isLoading}
+          />
         </div>
 
         <button
           onClick={handleInitiateCall}
-          disabled={isLoading}
+          disabled={isLoading || !phoneNumber}
           className={styles.button}
         >
           {isLoading ? 'Initiating...' : 'Test Call'}
