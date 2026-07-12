@@ -1,0 +1,142 @@
+.hero {
+  margin-top: 70px;
+  padding: 6rem 2rem;
+  background: linear-gradient(135deg, #f3f4f6 0%, #ffffff 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.content h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+  color: #1f2937;
+}
+
+.highlight {
+  color: #3b82f6;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: #6b7280;
+  margin-bottom: 2rem;
+  line-height: 1.8;
+}
+
+.industries {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+}
+
+.industries span {
+  padding: 0.5rem 1rem;
+  background: #e5e7eb;
+  border-radius: 2rem;
+  color: #1f2937;
+}
+
+.industries span:first-child {
+  font-weight: 600;
+  background: transparent;
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.buttons button {
+  font-size: 1.1rem;
+  padding: 1rem 2rem;
+}
+
+.trust {
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
+
+.demo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.demoBox {
+  background: #ffffff;
+  border: 2px solid #e5e7eb;
+  border-radius: 1rem;
+  padding: 2.5rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.avatar {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.demoBox h3 {
+  margin-bottom: 0.5rem;
+}
+
+.demoBox p {
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+}
+
+.demoOr {
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .content h1 {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    margin-top: 60px;
+    padding: 3rem 1rem;
+    min-height: auto;
+  }
+
+  .content h1 {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
+
+  .buttons button {
+    width: 100%;
+  }
+}

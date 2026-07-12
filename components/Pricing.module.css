@@ -1,0 +1,106 @@
+.pricing {
+  background: #ffffff;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.pricing h2 {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  text-align: center;
+  color: #6b7280;
+  margin-bottom: 3rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.card {
+  border: 2px solid #e5e7eb;
+  border-radius: 0.75rem;
+  padding: 2rem;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.1);
+}
+
+.popular {
+  border-color: #3b82f6;
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.2);
+  transform: scale(1.05);
+}
+
+.badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #3b82f6;
+  color: white;
+  padding: 0.25rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.card h3 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.price {
+  margin-bottom: 1.5rem;
+}
+
+.amount {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.period {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.features {
+  list-style: none;
+  margin-bottom: 2rem;
+}
+
+.features li {
+  padding: 0.5rem 0;
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
+.features li:before {
+  content: '';
+}
+
+.note {
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 1024px) {
+  .popular {
+    transform: scale(1);
+  }
+}

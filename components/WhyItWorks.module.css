@@ -1,0 +1,61 @@
+.section {
+  background: #ffffff;
+  text-align: center;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section h2 {
+  margin-bottom: 3rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.stat {
+  padding: 2rem;
+}
+
+.number {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #3b82f6;
+  margin-bottom: 0.5rem;
+}
+
+.stat p {
+  color: #6b7280;
+  font-size: 1rem;
+}
+
+.highlight {
+  background: #f0f9ff;
+  border-left: 4px solid #3b82f6;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  margin-top: 2rem;
+}
+
+.highlight p {
+  font-size: 1.1rem;
+  color: #1f2937;
+  line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+  .number {
+    font-size: 2rem;
+  }
+
+  .highlight p {
+    font-size: 0.95rem;
+  }
+}

@@ -1,0 +1,73 @@
+.cta {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  text-align: center;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.cta h2 {
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.cta p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.buttons button {
+  font-size: 1.1rem;
+}
+
+.buttons .btn-primary {
+  background: white;
+  color: #3b82f6;
+  border: none;
+}
+
+.buttons .btn-primary:hover {
+  background: #f3f4f6;
+}
+
+.buttons .btn-secondary {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid white;
+}
+
+.buttons .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.offer {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width: 768px) {
+  .buttons {
+    flex-direction: column;
+  }
+
+  .buttons button {
+    width: 100%;
+  }
+
+  .cta p {
+    font-size: 1rem;
+  }
+}
