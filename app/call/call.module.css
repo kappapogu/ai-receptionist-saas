@@ -1,242 +1,234 @@
-.container {
+.page {
   min-height: 100vh;
+  background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #0f172a 0%, #1a1f3a 100%);
   padding: 2rem;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-.card {
-  background: rgba(30, 41, 59, 0.95);
+.outer {
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(59, 130, 246, 0.15);
+  border-radius: 2rem;
+  padding: 3rem 2rem;
+  max-width: 600px;
+  width: 100%;
+  backdrop-filter: blur(10px);
+}
+
+.badge {
+  text-align: center;
+  color: #64b5f6;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  tracking: 2px;
+}
+
+.inner {
+  background: rgba(20, 35, 65, 0.8);
   border: 1px solid rgba(59, 130, 246, 0.2);
   border-radius: 1.5rem;
   padding: 3rem 2rem;
-  max-width: 500px;
-  width: 100%;
   text-align: center;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
 }
 
-.title {
-  color: #60a5fa;
-  font-size: 2rem;
-  font-weight: 700;
-  margin: 0 0 1rem 0;
-  line-height: 1.3;
-}
-
-.callTitle {
-  color: #60a5fa;
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin: 0;
-}
-
-.callHeader {
+.agentBar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(59, 130, 246, 0.2);
-}
-
-.callTimer {
-  background: rgba(59, 130, 246, 0.1);
-  color: #60a5fa;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  font-weight: 600;
-  font-size: 1rem;
-  font-family: 'Courier New', monospace;
-}
-
-.agentInfo {
-  margin-bottom: 2rem;
+  justify-content: center;
+  gap: 0.75rem;
+  background: rgba(59, 130, 246, 0.05);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 2rem;
+  padding: 0.75rem 1.5rem;
+  margin-bottom: 2.5rem;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .avatar {
-  font-size: 4rem;
-  display: block;
-  margin-bottom: 1rem;
-  animation: bounce 2s infinite;
+  font-size: 1.5rem;
 }
 
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+.agentName {
+  color: #64b5f6;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
-.subtitle {
-  color: #cbd5e1;
-  font-size: 1.1rem;
-  margin: 0;
-  font-weight: 500;
+.language {
+  color: #90caf9;
+  font-size: 0.9rem;
+  opacity: 0.7;
 }
 
-.callButton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem 3rem;
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  color: white;
-  font-size: 1.3rem;
-  font-weight: 700;
-  border: none;
-  border-radius: 0.75rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin: 2rem 0;
-  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
-  letter-spacing: 0.5px;
-}
-
-.callButton:hover {
-  background: linear-gradient(135deg, #059669 0%, #047857 100%);
-  transform: translateY(-4px);
-  box-shadow: 0 15px 40px rgba(16, 185, 129, 0.4);
-}
-
-.callButton:active {
-  transform: translateY(-2px);
-}
-
-.micButton {
-  width: 160px;
-  height: 160px;
-  margin: 2rem auto;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, rgba(59, 130, 246, 0.1) 100%);
-  border: 2px solid #3b82f6;
+.micSection {
+  margin: 3rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 1.5rem;
+}
+
+.micButton {
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  border: 3px solid rgba(100, 181, 246, 0.6);
+  background: radial-gradient(circle at 30% 30%, rgba(100, 181, 246, 0.15) 0%, rgba(59, 130, 246, 0.05) 100%);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
+  position: relative;
+  box-shadow: 0 0 40px rgba(59, 130, 246, 0.1);
+}
+
+.micButton:hover:not(:disabled) {
+  border-color: rgba(100, 181, 246, 0.8);
+  background: radial-gradient(circle at 30% 30%, rgba(100, 181, 246, 0.25) 0%, rgba(59, 130, 246, 0.1) 100%);
+  box-shadow: 0 0 60px rgba(59, 130, 246, 0.2);
 }
 
 .micButton.listening {
-  background: radial-gradient(circle, #3b82f6 0%, rgba(59, 130, 246, 0.5) 100%);
-  border-color: #60a5fa;
-  box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
-  animation: pulse 1s ease-in-out infinite;
+  border-color: #64b5f6;
+  background: radial-gradient(circle at 30% 30%, rgba(100, 181, 246, 0.3) 0%, rgba(59, 130, 246, 0.15) 100%);
+  animation: pulse 1.5s ease-in-out infinite;
+  box-shadow: 0 0 80px rgba(100, 181, 246, 0.3);
+}
+
+.micButton.calling {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 
 @keyframes pulse {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+    box-shadow: 0 0 40px rgba(100, 181, 246, 0.2), inset 0 0 40px rgba(100, 181, 246, 0.1);
   }
   50% {
-    box-shadow: 0 0 40px rgba(59, 130, 246, 0.8);
+    box-shadow: 0 0 80px rgba(100, 181, 246, 0.4), inset 0 0 60px rgba(100, 181, 246, 0.15);
   }
 }
 
 .micIcon {
-  font-size: 3rem;
-  display: block;
-  margin-bottom: 0.5rem;
+  font-size: 5rem;
 }
 
-.micStatus {
-  color: #cbd5e1;
-  font-size: 0.9rem;
+.instruction {
+  color: #b0bec5;
+  font-size: 1.1rem;
   margin: 0;
   font-weight: 500;
+  letter-spacing: 0.3px;
 }
 
 .transcriptBox {
   background: rgba(15, 23, 42, 0.8);
-  border: 1px solid rgba(59, 130, 246, 0.2);
-  border-radius: 0.75rem;
+  border: 1px solid rgba(100, 181, 246, 0.2);
+  border-radius: 1rem;
   padding: 1.5rem;
-  margin: 1.5rem 0;
-  text-align: left;
-}
-
-.transcriptLabel {
-  color: #94a3b8;
-  font-size: 0.85rem;
-  margin: 0 0 0.5rem 0;
-  text-transform: uppercase;
-  font-weight: 600;
+  margin: 2rem 0;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .transcriptText {
-  color: #e2e8f0;
+  color: #90caf9;
   font-size: 1rem;
   margin: 0;
-  line-height: 1.5;
+  line-height: 1.6;
   font-style: italic;
 }
 
-.endCallButton {
-  padding: 1rem 2rem;
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-  color: white;
-  font-size: 1rem;
+.divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(100, 181, 246, 0.2),
+    transparent
+  );
+  margin: 2rem 0;
+}
+
+.phoneSection {
+  margin: 2rem 0 0 0;
+}
+
+.phoneLabel {
+  color: #b0bec5;
+  font-size: 0.95rem;
+  margin: 0 0 1rem 0;
+  letter-spacing: 0.3px;
+}
+
+.phoneLink {
+  display: inline-block;
+  color: #64b5f6;
+  text-decoration: none;
+  font-size: 1.6rem;
   font-weight: 700;
-  border: none;
-  border-radius: 0.75rem;
-  cursor: pointer;
+  padding: 1rem 2rem;
+  border: 2px solid rgba(100, 181, 246, 0.4);
+  border-radius: 1rem;
   transition: all 0.3s ease;
-  margin-top: 1rem;
+  margin: 0.5rem 0;
 }
 
-.endCallButton:hover {
-  background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
-  transform: translateY(-2px);
+.phoneLink:hover {
+  border-color: rgba(100, 181, 246, 0.8);
+  color: #90caf9;
+  box-shadow: 0 0 30px rgba(100, 181, 246, 0.15);
 }
 
-.callId {
-  color: #64748b;
-  font-size: 0.8rem;
-  margin-top: 1rem;
-  word-break: break-all;
-}
-
-.errorText {
-  color: #fca5a5;
-  font-size: 1.1rem;
-  line-height: 1.6;
-}
-
-.hint {
-  color: #94a3b8;
+.phoneSub {
+  color: #607d8b;
   font-size: 0.9rem;
-  margin-top: 1rem;
+  margin: 0.75rem 0 0 0;
+  letter-spacing: 0.3px;
 }
 
-@media (max-width: 640px) {
-  .card {
+.footer {
+  color: #90caf9;
+  font-size: 0.95rem;
+  margin: 2rem 0 0 0;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+@media (max-width: 768px) {
+  .outer {
+    padding: 2rem 1rem;
+  }
+
+  .inner {
     padding: 2rem 1.5rem;
   }
 
-  .title {
-    font-size: 1.5rem;
-  }
-
-  .avatar {
-    font-size: 3rem;
-  }
-
-  .callButton {
-    padding: 1.25rem 2rem;
-    font-size: 1.1rem;
-  }
-
   .micButton {
-    width: 140px;
-    height: 140px;
+    width: 180px;
+    height: 180px;
   }
 
   .micIcon {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
+  }
+
+  .instruction {
+    font-size: 1rem;
+  }
+
+  .phoneLink {
+    font-size: 1.3rem;
   }
 }
