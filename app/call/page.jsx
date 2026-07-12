@@ -5,68 +5,90 @@ import styles from './call.module.css';
 
 export default function CallAgent() {
   const [isListening, setIsListening] = useState(false);
-  const [transcript, setTranscript] = useState('');
   const [status, setStatus] = useState('idle');
   const [callId, setCallId] = useState(null);
-  const recognitionRef = useRef(null);
+  const retellRef = useRef(null);
+  const callRef = useRef(null);
 
   useEffect(() => {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SpeechRecognition) return;
+    // Load Retell SDK
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/retell-client-js-sdk@latest/lib/index.js';
+    script.onload = () => {
+      console.log('Retell SDK loaded');
+      retellRef.current = window.Retell;
+    };
+    document.body.appendChild(script);
 
-    const recognition = new SpeechRecognition();
-    recognition.continuous = true;
-    recognition.interimResults = true;
-
-    recognition.onstart = () => setIsListening(true);
-    recognition.onend = () => setIsListening(false);
-    recognition.onresult = (event) => {
-      let interim = '';
-      for (let i = event.resultIndex; i < event.results.length; i++) {
-        const trans = event.results[i][0].transcript;
-        if (event.results[i].isFinal) {
-          setTranscript((prev) => prev + trans + ' ');
-        } else {
-          interim += trans;
-        }
+    return () => {
+      if (callRef.current) {
+        callRef.current.hangup();
       }
     };
-
-    recognition.onerror = (event) => {
-      console.error('Speech error:', event.error);
-    };
-
-    recognitionRef.current = recognition;
-    return () => recognition.abort();
   }, []);
 
   const handleMicClick = async () => {
     if (status === 'active') {
-      if (isListening) {
-        recognitionRef.current?.stop();
-      }
+      callRef.current?.hangup();
+      setStatus('idle');
+      setIsListening(false);
       return;
     }
 
     setStatus('connecting');
-    setTranscript('');
-    setCallId(null);
 
     try {
-      // Start listening for user voice input
-      recognitionRef.current?.start();
+      // Get web call token from backend
+      const response = await fetch('/api/retell/web-call', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      });
 
-      // Brief delay then mark as active
-      setTimeout(() => {
+      const data = await response.json();
+
+      if (!response.ok) {
+        setStatus('error');
+        console.error('Web call error:', data);
+        return;
+      }
+
+      // Initialize Retell call
+      if (!retellRef.current) {
+        setStatus('error');
+        console.error('Retell SDK not loaded');
+        return;
+      }
+
+      const call = retellRef.current.call;
+
+      // Set up event listeners
+      call.on('call_started', () => {
+        console.log('✅ Call started');
         setStatus('active');
-        setCallId('local-' + Date.now());
-      }, 500);
+        setIsListening(true);
+        setCallId(data.call_id);
+      });
 
-      console.log('Browser voice input started');
+      call.on('call_ended', () => {
+        console.log('❌ Call ended');
+        setStatus('idle');
+        setIsListening(false);
+      });
+
+      call.on('error', (error) => {
+        console.error('Call error:', error);
+        setStatus('error');
+      });
+
+      // Start call with access token
+      await call.startCall({
+        accessToken: data.access_token,
+      });
+
+      callRef.current = call;
     } catch (error) {
       setStatus('error');
-      setTranscript(`Microphone error: ${error.message}`);
-      console.error('Microphone error:', error);
+      console.error('Error:', error);
     }
   };
 
@@ -91,19 +113,12 @@ export default function CallAgent() {
               <span className={styles.micIcon}>🎤</span>
             </button>
             <p className={styles.instruction}>
-              {status === 'connecting' && 'Connecting to agent...'}
-              {status === 'active' && (isListening ? 'Listening...' : 'Click mic to start talking')}
-              {status === 'error' && 'Error connecting. Try again.'}
+              {status === 'connecting' && 'Connecting...'}
+              {status === 'active' && (isListening ? 'Listening...' : 'Click mic to talk')}
+              {status === 'error' && 'Error. Try again.'}
               {status === 'idle' && 'Click to start a conversation'}
             </p>
           </div>
-
-          {transcript && (
-            <div className={styles.transcriptBox}>
-              <p className={styles.transcriptLabel}>You:</p>
-              <p className={styles.transcriptText}>{transcript}</p>
-            </div>
-          )}
 
           {callId && (
             <div className={styles.callInfo}>
