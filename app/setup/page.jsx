@@ -32,7 +32,7 @@ export default function SetupPage() {
             <div className={styles.stepNumber}>2</div>
             <div className={styles.stepContent}>
               <h3>Select Your Agent</h3>
-              <p>Click on agent: <code>agent_4b8c2c11131f8aa25b7d65e458</code></p>
+              <p>Click on agent: <span className={styles.code}>agent_4b8c2c11131f8aa25b7d65e458</span></p>
             </div>
           </div>
 
@@ -49,7 +49,7 @@ export default function SetupPage() {
             <div className={styles.stepContent}>
               <h3>Add Webhook URL</h3>
               <div className={styles.urlBox}>
-                <code>{webhookUrl}</code>
+                <span className={styles.code}>{webhookUrl}</span>
                 <button
                   onClick={() => copyToClipboard(webhookUrl, 'url')}
                   className={styles.copyBtn}
