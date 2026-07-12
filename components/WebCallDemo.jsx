@@ -7,6 +7,9 @@ export default function WebCallDemo() {
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState('');
   const [isSupported, setIsSupported] = useState(true);
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [callStatus, setCallStatus] = useState('');
+  const [isCalling, setIsCalling] = useState(false);
   const recognitionRef = useRef(null);
 
   useEffect(() => {
@@ -57,13 +60,42 @@ export default function WebCallDemo() {
     };
   }, []);
 
-  const handleMicClick = () => {
-    if (!recognitionRef.current) return;
+  const handleMicClick = async () => {
+    if (!phoneNumber && !isListening) {
+      // First click: ask for phone number
+      const userPhone = prompt('Enter your phone number to receive the call:\n(e.g., +1-415-555-1234)');
+      if (!userPhone) return;
+      setPhoneNumber(userPhone);
+      setCallStatus('📞 Initiating call...');
+      setIsCalling(true);
 
-    if (isListening) {
-      recognitionRef.current.stop();
-    } else {
-      recognitionRef.current.start();
+      try {
+        const response = await fetch('/api/retell/initiate-call', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ phoneNumber: userPhone }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          setCallStatus(`✅ Call initiated! You should receive a call shortly.\nCall ID: ${data.call_id}`);
+          setTranscript('');
+        } else {
+          setCallStatus(`❌ Error: ${data.error || 'Failed to initiate call'}`);
+          setPhoneNumber('');
+        }
+      } catch (error) {
+        setCallStatus(`❌ Error: ${error.message}`);
+        setPhoneNumber('');
+      } finally {
+        setIsCalling(false);
+      }
+    } else if (isListening) {
+      // Stop listening
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
+      }
     }
   };
 
@@ -103,16 +135,23 @@ export default function WebCallDemo() {
 
           <div className={styles.micContainer}>
             <button
-              className={`${styles.micButton} ${isListening ? styles.active : ''}`}
+              className={`${styles.micButton} ${isListening ? styles.active : ''} ${isCalling ? styles.calling : ''}`}
               onClick={handleMicClick}
-              title={isListening ? 'Stop listening' : 'Start listening'}
+              disabled={isCalling}
+              title={isCalling ? 'Initiating call...' : isListening ? 'Stop listening' : 'Click to call'}
             >
-              <span className={styles.micIcon}>🎤</span>
+              <span className={styles.micIcon}>{isCalling ? '📞' : '🎤'}</span>
             </button>
             <p className={styles.instruction}>
-              {isListening ? 'Listening...' : 'Click to start a conversation'}
+              {isCalling ? 'Calling...' : isListening ? 'Listening...' : 'Click to start a conversation'}
             </p>
           </div>
+
+          {callStatus && (
+            <div className={styles.statusBox}>
+              <p className={styles.statusText}>{callStatus}</p>
+            </div>
+          )}
 
           {transcript && (
             <div className={styles.transcriptBox}>
