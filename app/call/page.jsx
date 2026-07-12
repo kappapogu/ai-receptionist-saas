@@ -64,12 +64,17 @@ export default function CallAgent() {
 
       if (!response.ok) {
         setStatus('error');
-        console.error('Call error:', data);
+        console.error('Call error:', {
+          status: response.status,
+          data: data,
+        });
+        setTranscript(`Error: ${data.error || 'Failed to connect'}`);
         return;
       }
 
       setCallId(data.call_id);
       setStatus('active');
+      console.log('Call initiated:', data.call_id);
 
       // Start listening for user voice input
       setTimeout(() => {
@@ -77,7 +82,8 @@ export default function CallAgent() {
       }, 500);
     } catch (error) {
       setStatus('error');
-      console.error('Error:', error);
+      setTranscript(`Network error: ${error.message}`);
+      console.error('Network error:', error);
     }
   };
 

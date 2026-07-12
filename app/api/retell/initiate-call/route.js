@@ -48,9 +48,21 @@ export async function POST(request) {
 
     if (!response.ok) {
       const error = await response.text();
-      console.error('Retell API error:', error);
+      console.error('❌ Retell API error:', {
+        status: response.status,
+        error: error,
+        request: {
+          agent_id: agentId,
+          from_number: phoneNumber,
+          to_number: process.env.NEXT_PUBLIC_RETELL_FROM_NUMBER || '+14847465311',
+        }
+      });
       return Response.json(
-        { error: 'Failed to initiate call', details: error },
+        {
+          error: 'Failed to initiate call',
+          details: error,
+          status: response.status
+        },
         { status: response.status }
       );
     }
