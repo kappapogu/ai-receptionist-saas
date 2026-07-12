@@ -6,6 +6,8 @@ import styles from './call.module.css';
 export default function CallAgent() {
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState('');
+  const [status, setStatus] = useState('idle');
+  const [callId, setCallId] = useState(null);
   const recognitionRef = useRef(null);
 
   useEffect(() => {
@@ -30,19 +32,53 @@ export default function CallAgent() {
       }
     };
 
+    recognition.onerror = (event) => {
+      console.error('Speech error:', event.error);
+    };
+
     recognitionRef.current = recognition;
     return () => recognition.abort();
   }, []);
 
-  const handleMicClick = () => {
-    if (isListening) {
-      recognitionRef.current?.stop();
-      setIsListening(false);
+  const handleMicClick = async () => {
+    if (status === 'active') {
+      if (isListening) {
+        recognitionRef.current?.stop();
+      }
       return;
     }
 
+    setStatus('connecting');
     setTranscript('');
-    recognitionRef.current?.start();
+    setCallId(null);
+
+    try {
+      // Initiate call to Retell AI number
+      const response = await fetch('/api/retell/initiate-call', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phoneNumber: '+14847465311' }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setStatus('error');
+        console.error('Call error:', data);
+        return;
+      }
+
+      setCallId(data.call_id);
+      setStatus('active');
+
+      // Start listening for user voice input
+      setTimeout(() => {
+        recognitionRef.current?.start();
+      }, 500);
+    } catch (error) {
+      setStatus('error');
+      console.error('Error:', error);
+    }
   };
 
   return (
@@ -59,19 +95,30 @@ export default function CallAgent() {
 
           <div className={styles.micSection}>
             <button
-              className={`${styles.micButton} ${isListening ? styles.listening : ''}`}
+              className={`${styles.micButton} ${isListening ? styles.listening : ''} ${status === 'connecting' ? styles.calling : ''} ${status === 'error' ? styles.error : ''}`}
               onClick={handleMicClick}
+              disabled={status === 'connecting'}
             >
               <span className={styles.micIcon}>🎤</span>
             </button>
             <p className={styles.instruction}>
-              {isListening ? 'Listening...' : 'Click to start a conversation'}
+              {status === 'connecting' && 'Connecting to agent...'}
+              {status === 'active' && (isListening ? 'Listening...' : 'Click mic to start talking')}
+              {status === 'error' && 'Error connecting. Try again.'}
+              {status === 'idle' && 'Click to start a conversation'}
             </p>
           </div>
 
           {transcript && (
             <div className={styles.transcriptBox}>
+              <p className={styles.transcriptLabel}>You:</p>
               <p className={styles.transcriptText}>{transcript}</p>
+            </div>
+          )}
+
+          {callId && (
+            <div className={styles.callInfo}>
+              <p>Call ID: {callId}</p>
             </div>
           )}
 

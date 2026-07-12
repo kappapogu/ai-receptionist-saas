@@ -105,8 +105,24 @@
 }
 
 .micButton.calling {
-  opacity: 0.7;
+  border-color: rgba(100, 181, 246, 0.8);
+  background: radial-gradient(circle at 30% 30%, rgba(100, 181, 246, 0.25) 0%, rgba(59, 130, 246, 0.1) 100%);
+  animation: connecting 1.5s ease-in-out infinite;
   cursor: not-allowed;
+}
+
+.micButton.error {
+  border-color: rgba(244, 67, 54, 0.6);
+  background: radial-gradient(circle at 30% 30%, rgba(244, 67, 54, 0.15) 0%, rgba(244, 67, 54, 0.05) 100%);
+}
+
+@keyframes connecting {
+  0%, 100% {
+    box-shadow: 0 0 40px rgba(100, 181, 246, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 60px rgba(100, 181, 246, 0.3);
+  }
 }
 
 @keyframes pulse {
@@ -142,12 +158,27 @@
   justify-content: center;
 }
 
+.transcriptLabel {
+  color: #64b5f6;
+  font-size: 0.85rem;
+  margin: 0 0 0.5rem 0;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
 .transcriptText {
   color: #90caf9;
   font-size: 1rem;
   margin: 0;
   line-height: 1.6;
   font-style: italic;
+}
+
+.callInfo {
+  color: #64748b;
+  font-size: 0.8rem;
+  margin-top: 1rem;
+  text-align: center;
 }
 
 .divider {
