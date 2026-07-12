@@ -3,6 +3,15 @@
  * Receives call events from Retell AI
  */
 
+export async function GET(request) {
+  console.log('📞 Retell Webhook Test (GET)');
+  return Response.json({ success: true, message: 'Webhook endpoint is configured correctly' });
+}
+
+export async function OPTIONS(request) {
+  return new Response(null, { status: 200 });
+}
+
 export async function POST(request) {
   try {
     const body = await request.json();
