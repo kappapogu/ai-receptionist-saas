@@ -7,7 +7,6 @@ export default function WebCallDemo() {
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState('');
   const [isSupported, setIsSupported] = useState(true);
-  const [phoneNumber, setPhoneNumber] = useState('');
   const [callStatus, setCallStatus] = useState('');
   const [isCalling, setIsCalling] = useState(false);
   const recognitionRef = useRef(null);
@@ -61,33 +60,28 @@ export default function WebCallDemo() {
   }, []);
 
   const handleMicClick = async () => {
-    if (!phoneNumber && !isListening) {
-      // First click: ask for phone number (user's phone to call FROM)
-      const userPhone = prompt('Enter your phone number to call the AI:\n(e.g., +1-415-555-1234)\n\nYou will call: +1-484-746-5311');
-      if (!userPhone) return;
-      setPhoneNumber(userPhone);
-      setCallStatus('📞 Setting up call to +1-484-746-5311...');
+    if (!isCalling && !isListening) {
+      // Click mic to call the Retell AI number
+      setCallStatus('📞 Initiating call to AI receptionist...');
       setIsCalling(true);
 
       try {
         const response = await fetch('/api/retell/initiate-call', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ phoneNumber: userPhone }),
+          body: JSON.stringify({ phoneNumber: '+14847465311' }),
         });
 
         const data = await response.json();
 
         if (response.ok) {
-          setCallStatus(`✅ Call setup complete!\n\nCall +1-484-746-5311 from your phone ${userPhone}\n\nCall ID: ${data.call_id}`);
+          setCallStatus(`✅ Call initiated!\n\nSpeak to our AI receptionist\n\nCall ID: ${data.call_id}`);
           setTranscript('');
         } else {
-          setCallStatus(`❌ Error: ${data.error || 'Failed to setup call'}`);
-          setPhoneNumber('');
+          setCallStatus(`❌ Error: ${data.error || 'Failed to initiate call'}`);
         }
       } catch (error) {
         setCallStatus(`❌ Error: ${error.message}`);
-        setPhoneNumber('');
       } finally {
         setIsCalling(false);
       }
@@ -171,7 +165,7 @@ export default function WebCallDemo() {
           </div>
 
           <p className={styles.footer}>
-            {isListening ? 'Speak clearly and we\'ll process your message.' : 'Click the mic. Talk to our AI for 60s.'}
+            Click the mic. Talk to our AI receptionist.
           </p>
         </div>
       </div>
