@@ -6,7 +6,6 @@ import styles from './call.module.css';
 export default function CallAgent() {
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState('');
-  const [isCalling, setIsCalling] = useState(false);
   const recognitionRef = useRef(null);
 
   useEffect(() => {
@@ -35,31 +34,15 @@ export default function CallAgent() {
     return () => recognition.abort();
   }, []);
 
-  const handleMicClick = async () => {
+  const handleMicClick = () => {
     if (isListening) {
       recognitionRef.current?.stop();
       setIsListening(false);
       return;
     }
 
-    setIsCalling(true);
     setTranscript('');
-
-    try {
-      const response = await fetch('/api/retell/initiate-call', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phoneNumber: '+14847465311' }),
-      });
-
-      if (response.ok) {
-        recognitionRef.current?.start();
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    } finally {
-      setIsCalling(false);
-    }
+    recognitionRef.current?.start();
   };
 
   return (
@@ -76,9 +59,8 @@ export default function CallAgent() {
 
           <div className={styles.micSection}>
             <button
-              className={`${styles.micButton} ${isListening ? styles.listening : ''} ${isCalling ? styles.calling : ''}`}
+              className={`${styles.micButton} ${isListening ? styles.listening : ''}`}
               onClick={handleMicClick}
-              disabled={isCalling}
             >
               <span className={styles.micIcon}>🎤</span>
             </button>
