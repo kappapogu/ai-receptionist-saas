@@ -62,11 +62,11 @@ export default function WebCallDemo() {
 
   const handleMicClick = async () => {
     if (!phoneNumber && !isListening) {
-      // First click: ask for phone number
-      const userPhone = prompt('Enter your phone number to receive the call:\n(e.g., +1-415-555-1234)');
+      // First click: ask for phone number (user's phone to call FROM)
+      const userPhone = prompt('Enter your phone number to call the AI:\n(e.g., +1-415-555-1234)\n\nYou will call: +1-484-746-5311');
       if (!userPhone) return;
       setPhoneNumber(userPhone);
-      setCallStatus('📞 Initiating call...');
+      setCallStatus('📞 Setting up call to +1-484-746-5311...');
       setIsCalling(true);
 
       try {
@@ -79,10 +79,10 @@ export default function WebCallDemo() {
         const data = await response.json();
 
         if (response.ok) {
-          setCallStatus(`✅ Call initiated! You should receive a call shortly.\nCall ID: ${data.call_id}`);
+          setCallStatus(`✅ Call setup complete!\n\nCall +1-484-746-5311 from your phone ${userPhone}\n\nCall ID: ${data.call_id}`);
           setTranscript('');
         } else {
-          setCallStatus(`❌ Error: ${data.error || 'Failed to initiate call'}`);
+          setCallStatus(`❌ Error: ${data.error || 'Failed to setup call'}`);
           setPhoneNumber('');
         }
       } catch (error) {
@@ -163,11 +163,11 @@ export default function WebCallDemo() {
           <div className={styles.divider}></div>
 
           <div className={styles.phoneSection}>
-            <p className={styles.label}>Call our AI assistant</p>
+            <p className={styles.label}>Or call directly</p>
             <a href="tel:+14847465311" className={styles.phoneNumber}>
-              📞 +1 (484) 746-5311
+              📞 +1-484-746-5311
             </a>
-            <p className={styles.subtext}>24/7 live AI - call anytime</p>
+            <p className={styles.subtext}>24/7 live AI receptionist - call anytime</p>
           </div>
 
           <p className={styles.footer}>

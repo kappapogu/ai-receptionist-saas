@@ -28,6 +28,7 @@ export async function POST(request) {
     }
 
     // Call Retell API to initiate call
+    // User's phone number calls TO the Retell AI number
     const response = await fetch('https://api.retellai.com/v2/create-phone-call', {
       method: 'POST',
       headers: {
@@ -36,8 +37,8 @@ export async function POST(request) {
       },
       body: JSON.stringify({
         agent_id: agentId,
-        to_number: phoneNumber,
-        from_number: process.env.NEXT_PUBLIC_RETELL_FROM_NUMBER || '+15551234567', // Default Retell number
+        from_number: phoneNumber, // User's phone number (who is calling)
+        to_number: process.env.NEXT_PUBLIC_RETELL_FROM_NUMBER || '+14847465311', // Retell AI number (who is being called)
         custom_data: {
           source: 'website_demo',
           timestamp: new Date().toISOString(),
