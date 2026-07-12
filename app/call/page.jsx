@@ -39,18 +39,27 @@ export default function CallAgent() {
 
     try {
       // Get web call token from backend
+      console.log('📞 Requesting web call token...');
       const response = await fetch('/api/retell/web-call', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
       });
 
+      console.log('Response status:', response.status);
       const data = await response.json();
+      console.log('Response data:', data);
 
       if (!response.ok) {
         setStatus('error');
-        console.error('Web call error:', data);
+        console.error('❌ Web call error:', {
+          status: response.status,
+          error: data.error,
+          details: data.details,
+        });
         return;
       }
+
+      console.log('✅ Got access token:', data.access_token?.substring(0, 20) + '...');
 
       // Initialize Retell call
       if (!retellRef.current) {
