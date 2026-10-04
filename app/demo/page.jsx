@@ -40,11 +40,12 @@ export default function DemoPage() {
       });
     };
 
-    // Try multiple CDN sources
+    // Try multiple CDN sources with correct UMD paths
     const cdnUrls = [
-      'https://cdn.jsdelivr.net/npm/retell-client-js-sdk/lib/index.js',
-      'https://unpkg.com/retell-client-js-sdk/lib/index.js',
-      'https://cdn.jsdelivr.net/npm/retell-client-js-sdk@1.0.0/lib/index.js',
+      'https://unpkg.com/retell-client-js-sdk@1.3.3/dist/index.umd.js',
+      'https://cdn.jsdelivr.net/npm/retell-client-js-sdk@1.3.3/dist/index.umd.js',
+      'https://unpkg.com/retell-client-js-sdk/dist/index.umd.js',
+      'https://cdn.jsdelivr.net/npm/retell-client-js-sdk/dist/index.umd.js',
     ];
 
     const tryLoadSDK = async () => {
