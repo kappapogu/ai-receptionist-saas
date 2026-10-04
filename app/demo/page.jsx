@@ -19,6 +19,9 @@ export default function DemoPage() {
       console.log('✅ Retell SDK loaded');
       retellRef.current = window.Retell;
     };
+    script.onerror = () => {
+      console.error('❌ Failed to load Retell SDK');
+    };
     document.body.appendChild(script);
 
     return () => {
@@ -136,8 +139,8 @@ export default function DemoPage() {
           {callStatus === 'idle' || callStatus === 'error' ? (
             <div className={styles.callStart}>
               <h2>Ready for a live call?</h2>
-              <p>Click below to start a real WebRTC call</p>
-              {error && <div style={{ color: '#f87171', marginBottom: '1rem' }}>Error: {error}</div>}
+              <p>Click below to start a real WebRTC call with your mic enabled</p>
+              {error && <div style={{ color: '#f87171', marginBottom: '1rem', fontSize: '0.9rem' }}>⚠️ {error}</div>}
               <button onClick={startCall} className={styles.startBtn} disabled={callStatus === 'connecting'}>
                 {callStatus === 'connecting' ? 'Connecting...' : 'Start Live Call'}
               </button>
