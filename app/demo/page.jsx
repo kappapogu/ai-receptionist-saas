@@ -12,18 +12,61 @@ export default function DemoPage() {
   const timerRef = useRef(null);
 
   useEffect(() => {
-    // Load Retell SDK from CDN
-    const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/npm/retell-client-js-sdk@latest/lib/index.js';
-    script.onload = () => {
-      console.log('✅ Retell SDK loaded');
-      retellRef.current = window.Retell;
+    // Load Retell SDK from CDN with multiple fallbacks
+    let loaded = false;
+
+    const loadFromCDN = (url) => {
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = url;
+        script.async = true;
+
+        script.onload = () => {
+          if (window.Retell) {
+            console.log(`✅ Retell SDK loaded from: ${url}`);
+            retellRef.current = window.Retell;
+            loaded = true;
+            resolve();
+          } else {
+            reject(new Error('Retell not found in window'));
+          }
+        };
+
+        script.onerror = () => {
+          reject(new Error(`Failed to load: ${url}`));
+        };
+
+        document.body.appendChild(script);
+      });
     };
-    script.onerror = () => {
-      console.error('❌ Failed to load Retell SDK');
-      setError('Failed to load Retell SDK');
+
+    // Try multiple CDN sources
+    const cdnUrls = [
+      'https://cdn.jsdelivr.net/npm/retell-client-js-sdk/lib/index.js',
+      'https://unpkg.com/retell-client-js-sdk/lib/index.js',
+      'https://cdn.jsdelivr.net/npm/retell-client-js-sdk@1.0.0/lib/index.js',
+    ];
+
+    const tryLoadSDK = async () => {
+      for (const url of cdnUrls) {
+        try {
+          console.log(`Attempting to load SDK from: ${url}`);
+          await loadFromCDN(url);
+          return; // Success!
+        } catch (err) {
+          console.warn(`CDN failed (${url}):`, err.message);
+          continue;
+        }
+      }
+
+      // All CDNs failed
+      if (!loaded) {
+        console.error('❌ Failed to load Retell SDK from all CDN sources');
+        setError('Failed to load Retell SDK - Please check your internet connection');
+      }
     };
-    document.body.appendChild(script);
+
+    tryLoadSDK();
 
     return () => {
       if (callRef.current) {
