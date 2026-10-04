@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import RetellClient from 'retell-client-js-sdk';
 import styles from './demo.module.css';
 
 export default function DemoPage() {
@@ -12,37 +13,14 @@ export default function DemoPage() {
   const timerRef = useRef(null);
 
   useEffect(() => {
-    // Load Retell SDK from multiple CDN sources
-    const loadSDK = () => {
-      const script = document.createElement('script');
-      script.src = 'https://cdn.jsdelivr.net/npm/retell-client-js-sdk/lib/index.js';
-      script.async = true;
-
-      script.onload = () => {
-        console.log('✅ Retell SDK loaded');
-        retellRef.current = window.Retell;
-      };
-
-      script.onerror = () => {
-        console.error('❌ Failed to load Retell SDK from CDN');
-        // Try alternate CDN
-        const altScript = document.createElement('script');
-        altScript.src = 'https://unpkg.com/retell-client-js-sdk/lib/index.js';
-        altScript.async = true;
-        altScript.onload = () => {
-          console.log('✅ Retell SDK loaded from alternate CDN');
-          retellRef.current = window.Retell;
-        };
-        altScript.onerror = () => {
-          console.error('❌ Failed to load Retell SDK from both CDNs');
-        };
-        document.body.appendChild(altScript);
-      };
-
-      document.body.appendChild(script);
-    };
-
-    loadSDK();
+    // Initialize Retell SDK client
+    try {
+      retellRef.current = new RetellClient();
+      console.log('✅ Retell SDK initialized');
+    } catch (err) {
+      console.error('❌ Failed to initialize Retell SDK:', err);
+      setError('SDK initialization failed');
+    }
 
     return () => {
       if (callRef.current) {
@@ -94,7 +72,7 @@ export default function DemoPage() {
       console.log('✅ Got access token');
 
       if (!retellRef.current) {
-        throw new Error('Retell SDK not loaded');
+        throw new Error('Retell SDK not initialized');
       }
 
       const call = retellRef.current.call;
