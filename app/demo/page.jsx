@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import RetellClient from 'retell-client-js-sdk';
 import styles from './demo.module.css';
 
 export default function DemoPage() {
@@ -13,14 +12,18 @@ export default function DemoPage() {
   const timerRef = useRef(null);
 
   useEffect(() => {
-    // Initialize Retell SDK client
-    try {
-      retellRef.current = new RetellClient();
-      console.log('✅ Retell SDK initialized');
-    } catch (err) {
-      console.error('❌ Failed to initialize Retell SDK:', err);
-      setError('SDK initialization failed');
-    }
+    // Load Retell SDK from CDN
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/retell-client-js-sdk@latest/lib/index.js';
+    script.onload = () => {
+      console.log('✅ Retell SDK loaded');
+      retellRef.current = window.Retell;
+    };
+    script.onerror = () => {
+      console.error('❌ Failed to load Retell SDK');
+      setError('Failed to load Retell SDK');
+    };
+    document.body.appendChild(script);
 
     return () => {
       if (callRef.current) {
