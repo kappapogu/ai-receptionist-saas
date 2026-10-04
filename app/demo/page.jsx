@@ -12,17 +12,37 @@ export default function DemoPage() {
   const timerRef = useRef(null);
 
   useEffect(() => {
-    // Load Retell SDK
-    const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/npm/retell-client-js-sdk@latest/lib/index.js';
-    script.onload = () => {
-      console.log('✅ Retell SDK loaded');
-      retellRef.current = window.Retell;
+    // Load Retell SDK from multiple CDN sources
+    const loadSDK = () => {
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/retell-client-js-sdk/lib/index.js';
+      script.async = true;
+
+      script.onload = () => {
+        console.log('✅ Retell SDK loaded');
+        retellRef.current = window.Retell;
+      };
+
+      script.onerror = () => {
+        console.error('❌ Failed to load Retell SDK from CDN');
+        // Try alternate CDN
+        const altScript = document.createElement('script');
+        altScript.src = 'https://unpkg.com/retell-client-js-sdk/lib/index.js';
+        altScript.async = true;
+        altScript.onload = () => {
+          console.log('✅ Retell SDK loaded from alternate CDN');
+          retellRef.current = window.Retell;
+        };
+        altScript.onerror = () => {
+          console.error('❌ Failed to load Retell SDK from both CDNs');
+        };
+        document.body.appendChild(altScript);
+      };
+
+      document.body.appendChild(script);
     };
-    script.onerror = () => {
-      console.error('❌ Failed to load Retell SDK');
-    };
-    document.body.appendChild(script);
+
+    loadSDK();
 
     return () => {
       if (callRef.current) {
